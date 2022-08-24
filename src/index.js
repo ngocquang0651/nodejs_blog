@@ -8,6 +8,8 @@ const { join } = require("path");
 const app = express();
 const port = 3000;
 
+const route = require("./routes");
+
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(express.urlencoded({ extended: true }));
@@ -26,16 +28,7 @@ app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "resources/views"));
 app.set("search", path.join(__dirname, "resources/search"));
 
-app.get("/", (req, res) => {
-  res.render("home");
-});
-
-app.get("/news", (req, res) => {
-  res.render("news");
-});
-app.get("/search", (req, res) => {
-  console.log(req.query);
-  res.render("search");
-});
+//route init
+route(app);
 
 app.listen(3000, () => console.log("example app listening at ..."));
